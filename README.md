@@ -75,11 +75,9 @@ A self-care reminder app. It reminds users to stretch, drink water, to have good
 
 * Stream, notify users
    * Creation, allow users to input custom tasks
-   * ...
 * Calendar
    * DetailActivity, how well the user is feeling on that day.
    * Certain reminders for the day
-   * 
 
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
