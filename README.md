@@ -80,8 +80,7 @@ A self-care reminder app. It reminds users to stretch, drink water, to have good
    * Certain reminders for the day
 
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
-<img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
+<img src="wireframe.png" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 
