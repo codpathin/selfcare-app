@@ -89,8 +89,47 @@ A self-care reminder app. It reminds users to stretch, drink water, to have good
 ## Schema 
 [This section will be completed in Unit 9]
 ### Models
-[Add table of models]
+#### Post
+
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | image         | File     | image that user posts |
+   | caption       | String   | image caption by author |
+   | tweet    | Tweet   | post a tweet to twitter API |
+   | createdAt     | DateTime | date when post is created (default field) |
+   | updatedAt     | DateTime | date when post is last updated (default field) |
+   
+#### Reminder
+
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | name         | String     | name of reminder |
+   | type       | String   | image caption by author |
+   | time       | DateTime   | time reminder will go off |
+   | notes       | String   | additional notes |
+   
+#### Stretches
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | name         | String     | name of stretch |
+   | image       | File   | image of stretch |
+   | description       | String   | description of the stretch |
 ### Networking
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
+#### List of network requests by screen
+   - Create Post Screen
+      - (Create/POST) Create a new tweet on a post
+         ```swift
+         public void publishTweet(String tweetContent, JsonHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("statuses/update.json");
+		// Can specify query string params directly or through RequestParams.
+		RequestParams params = new RequestParams();
+		params.put("status", tweetContent);
+		client.post(apiUrl, params, "", handler);
+	    }
+         ```
 - [OPTIONAL: List endpoints if using existing API such as Yelp]
+ HTTP Verb | Endpoint | Description
+   ----------|----------|------------
+|    `POST`    | statuses/update | updates the authenticating user's current status, also known as tweeting.
+|    `GET`    | oauth/authenticate | Allows a Consumer application to use an OAuth request_token to request user authorization.
+    
