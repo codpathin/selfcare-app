@@ -132,3 +132,8 @@ A self-care reminder app. It reminds users to stretch, drink water, to have good
    | ------------- | -------- | ------------|
    | `POST`         | statuses/update     | updates the authenticating user's current status, also known as tweeting. |
    | `GET`       | oauth/authenticate   | Allows a Consumer application to use an OAuth request_token to request user authorization.| |
+   
+#### Walkthrough
+
+<img src='SelfCareWalkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
