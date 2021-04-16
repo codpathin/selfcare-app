@@ -6,18 +6,21 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="10sp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tvName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name" />
+                android:text="Name"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/etName"
@@ -28,10 +31,12 @@
                 android:inputType="textPersonName" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tvDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Date" />
+                android:text="Date"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <DatePicker
                 android:id="@+id/datePicker"
@@ -41,10 +46,12 @@
                 android:datePickerMode="spinner" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/tvTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Time" />
+                android:text="Time"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TimePicker
                 android:id="@+id/timePicker"
@@ -53,10 +60,12 @@
                 android:timePickerMode="spinner" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/tvType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Type of Reminder" />
+                android:text="Type of Reminder"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/spinnerTask"
@@ -64,18 +73,26 @@
                 android:layout_height="35sp" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/tvNotes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Notes" />
+                android:text="Notes"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/etNotes"
+            <ScrollView
+                android:id="@+id/sv"
                 android:layout_width="match_parent"
-                android:layout_height="150sp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:inputType="textMultiLine" />
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etNotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="150sp"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine" />
+            </ScrollView>
 
             <Button
                 android:id="@+id/btnCreate"

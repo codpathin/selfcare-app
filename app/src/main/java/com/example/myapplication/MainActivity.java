@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new CalendarFragment();
                         break;
                     case R.id.action_compose:
-                        fragment = new ComposeActivity();
+                        fragment = new ComposeFragment();
                         break;
                     /*case R.id.action_music:
                         // do something here
