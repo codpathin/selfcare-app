@@ -11,7 +11,7 @@
         android:text="Name" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
+        android:id="@+id/etName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -61,7 +61,7 @@
         android:text="Notes" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/etNotes"
         android:layout_width="match_parent"
         android:layout_height="150sp"
         android:ems="10"
@@ -69,7 +69,7 @@
         android:inputType="textMultiLine" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnCreate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="create" />

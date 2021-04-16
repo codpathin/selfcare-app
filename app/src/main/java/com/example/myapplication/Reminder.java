@@ -3,14 +3,17 @@ package com.example.myapplication;
 public class Reminder {
 
     private String name;
-    private String date;
-    private String time;
+    private int day;
+    private int hour;
+    private int min;
     private String notes;
 
-    public Reminder(String name, String date, String time, String notes){
+
+    public Reminder(String name, int day, int hour, int min,  String notes){
         this.name = name;
-        this.date = date;
-        this.time = time;
+        this.day = day;
+        this.hour = hour;
+        this.min = min;
         this.notes = notes;
     }
 
@@ -18,12 +21,16 @@ public class Reminder {
         return name;
     }
 
-    public String getDate(){
-        return date;
+    public int getDate(){
+        return day;
     }
 
-    public String getTime(){
-        return time;
+    public int getHour(){
+        return hour;
+    }
+
+    public int getMin(){
+        return min;
     }
 
     public String getNotes(){
