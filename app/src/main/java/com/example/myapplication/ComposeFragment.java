@@ -21,9 +21,9 @@ import androidx.fragment.app.Fragment;
 
 import java.io.File;
 
-public class ComposeActivity extends Fragment {
+public class ComposeFragment extends Fragment {
 
-    public static final String TAG = "ComposeActivity";
+    public static final String TAG = "ComposeFragment";
     private EditText etName;
     private DatePicker etDate;
     private TimePicker etTime;

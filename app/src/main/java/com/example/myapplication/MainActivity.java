@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
 
         //For testing different days
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
 
         int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
         SharedPreferences settings = getSharedPreferences("PREFS", 0);
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new CalendarFragment();
                         break;
                     case R.id.action_compose:
-                        fragment = new ComposeActivity();
+                        fragment = new ComposeFragment();
                         break;
                     /*case R.id.action_music:
                         // do something here
