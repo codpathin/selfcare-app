@@ -11,6 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+        <activity android:name=".NotePreviewActivity"/>
+        <activity android:name=".AddNoteActivity"/>
         <activity android:name=".MoodActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
