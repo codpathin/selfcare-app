@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -13,8 +12,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.Calendar;
-
 public class MainActivity extends AppCompatActivity {
     final FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -23,10 +20,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*
         Calendar calendar = Calendar.getInstance();
 
         //For testing different days
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
 
         int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
         SharedPreferences settings = getSharedPreferences("PREFS", 0);
@@ -42,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             editor.commit();
 
             startActivity(new Intent(MainActivity.this, MoodActivity.class));
-        }
+        }*/
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
 
@@ -69,20 +67,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /*
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_compose);
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerTask);
-// Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.planets_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-    }*/
-
-
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

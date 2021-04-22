@@ -1,65 +1,87 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import java.io.File;
+
 public class ComposeFragment extends Fragment {
-    TextView tvName, tvDate, tvTime, tvType, tvNotes;
-    EditText etName, etNotes;
-    DatePicker datePicker;
-    TimePicker timePicker;
-    Spinner spinnerTask;
-    Button btnCreate;
 
-    public ComposeFragment() {
-        //rq'd empty public constructor
-    }
+    public static final String TAG = "ComposeFragment";
+    private EditText etName;
+    private DatePicker etDate;
+    private TimePicker etTime;
+    private EditText etNotes;
+    private Button btnCreate;
 
-    @Override
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_compose, container, false);
+        View view = inflater.inflate(R.layout.activity_compose, container, false);
+
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Spinner spinner = (Spinner) getView().findViewById(R.id.spinnerTask);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
+                R.array.planets_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
 
-        //binding all elements in layout resrc file
-        tvName = getView().findViewById(R.id.tvName);
-        tvDate = getView().findViewById(R.id.tvDate);
-        tvTime = getView().findViewById(R.id.tvTime);
-        tvType = getView().findViewById(R.id.tvType);
-        tvNotes = getView().findViewById(R.id.tvNotes);
-        etName = getView().findViewById(R.id.etName);
-        etNotes = getView().findViewById(R.id.etNotes);
-        datePicker = getView().findViewById(R.id.datePicker);
-        timePicker = getView().findViewById(R.id.timePicker);
-        spinnerTask = getView().findViewById(R.id.spinnerTask);
-        btnCreate = getView().findViewById(R.id.btnCreate);
+        etName = view.findViewById(R.id.etName);
+        etDate = view.findViewById(R.id.datePicker);
+        etTime = view.findViewById(R.id.timePicker);
+        etNotes = view.findViewById(R.id.etNotes);
+        btnCreate = view.findViewById(R.id.btnCreate);
 
-        btnCreate.setOnClickListener(new View.OnClickListener(){
+        etTime.setCurrentHour(0);
+        etTime.setCurrentMinute(0);
+
+        btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: bind name, date, time, type, notes to reminder class
-                //TODO: send reminder to be added to list of reminders
-                //TODO: create notification based on reminder
-                Toast.makeText(getContext(), "Reminder created!",Toast.LENGTH_SHORT).show();
+                String name = etName.getText().toString();
+                int date = etDate.getDayOfMonth();
+                int hour = etTime.getCurrentHour();
+                int min = etTime.getCurrentMinute();
+                String notes = etNotes.getText().toString();
+
+                if (name.isEmpty()) {
+                    Toast.makeText(getContext(), "Name cannot be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                Reminder created = new Reminder(name, date, hour, min, notes);
+                Toast.makeText(getContext(), "Reminder created!", Toast.LENGTH_SHORT).show();
+                goMainActivity();
             }
         });
+    }
+
+    private void goMainActivity() {
+        Intent i = new Intent(getContext(), MainActivity.class);
+        startActivity(i);
     }
 }
