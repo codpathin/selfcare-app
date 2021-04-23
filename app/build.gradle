@@ -45,5 +45,9 @@ dependencies {
     implementation 'com.applandeo:material-calendar-view:1.0.1'
     implementation 'com.github.prolificinteractive:material-calendarview:1.6.0'
 
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
+    
+    implementation 'org.parceler:parceler-api:1.1.12'
+    annotationProcessor 'org.parceler:parceler:1.1.12'
 }
