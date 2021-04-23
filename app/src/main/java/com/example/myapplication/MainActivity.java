@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -14,6 +15,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     final FragmentManager fragmentManager = getSupportFragmentManager();
+
+    Context context;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,9 +59,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.action_compose:
                         fragment = new ComposeFragment();
                         break;
-                    /*case R.id.action_music:
-                        // do something here
-                        return true;*/
+                    case R.id.action_logout:
+                        Intent i = new Intent(context, StretchlistActivity.class);
+                        context.startActivity(i);
+                        return true;
                     default: return true;
                 }
                 fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();

@@ -13,7 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity android:name=".DetailActvity"></activity>
-        <activity android:name=".StretchlistFragment" />
+        <activity android:name=".StretchlistActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".NotePreviewActivity" />
         <activity android:name=".AddNoteActivity" />
         <activity android:name=".MoodActivity" />
