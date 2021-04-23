@@ -10,6 +10,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.applandeo.materialcalendarview.CalendarView;
+import com.example.myapplication.fragments.CalendarFragment;
 
 public class AddNoteActivity extends AppCompatActivity {
     @Override

@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +19,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.MainActivity;
+import com.example.myapplication.R;
+import com.example.myapplication.Reminder;
+
 import java.io.File;
 
 public class ComposeFragment extends Fragment {
@@ -33,7 +37,7 @@ public class ComposeFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_compose, container, false);
+        View view = inflater.inflate(R.layout.fragment_compose, container, false);
 
         return view;
     }
@@ -63,7 +67,7 @@ public class ComposeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String name = etName.getText().toString();
-                int date = etDate.getDayOfMonth();
+                String date = (etDate.getMonth() + "."+etDate.getDayOfMonth()+"."+etDate.getYear());
                 int hour = etTime.getCurrentHour();
                 int min = etTime.getCurrentMinute();
                 String notes = etNotes.getText().toString();

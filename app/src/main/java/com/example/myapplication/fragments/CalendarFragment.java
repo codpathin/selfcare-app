@@ -1,10 +1,11 @@
-package com.example.myapplication;
+package com.example.myapplication.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,9 +14,14 @@ import androidx.fragment.app.Fragment;
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
+import com.example.myapplication.AddNoteActivity;
+import com.example.myapplication.MyEventDay;
+import com.example.myapplication.NotePreviewActivity;
+import com.example.myapplication.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -56,6 +62,7 @@ public class CalendarFragment extends Fragment {
         mCalendarView.setOnDayClickListener(new OnDayClickListener() {
             @Override
             public void onDayClick(EventDay eventDay) {
+                //NOTE: formatting - Toast.makeText(getContext(), ((eventDay.getCalendar().get(Calendar.MONTH))+"."+(eventDay.getCalendar().get(Calendar.DATE))+"."+(eventDay.getCalendar().get(Calendar.YEAR))),Toast.LENGTH_LONG).show();
                 previewNote(eventDay);
             }
         });
