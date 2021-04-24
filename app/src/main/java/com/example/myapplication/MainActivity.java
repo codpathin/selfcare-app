@@ -60,9 +60,8 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new ComposeFragment();
                         break;
                     case R.id.action_logout:
-                        Intent i = new Intent(context, StretchlistActivity.class);
-                        context.startActivity(i);
-                        return true;
+                        fragment = new StretchlistActivity();
+                        break;
                     default: return true;
                 }
                 fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
