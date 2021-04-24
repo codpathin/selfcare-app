@@ -1,6 +1,8 @@
 package com.example.myapplication.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,8 @@ import com.example.myapplication.MyEventDay;
 import com.example.myapplication.NotePreviewActivity;
 import com.example.myapplication.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,6 +41,13 @@ public class CalendarFragment extends Fragment {
     private List<EventDay> mEventDays = new ArrayList<>();
     private FloatingActionButton fab;
 
+    private Context context;
+    private MyEventDay savedObject;
+    private List<MyEventDay> listEvents = new ArrayList<>();
+    private static final String PREF_MY_OBJECT = "pref_my_object";
+    //private SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    private Gson gson = new GsonBuilder().create();
+
 
 
     @Override
@@ -51,6 +62,8 @@ public class CalendarFragment extends Fragment {
         fab = view.findViewById(R.id.fab);
         mCalendarView = view.findViewById(R.id.calendarView);
 
+        getMyObject();
+        mEventDays.add(savedObject);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +88,7 @@ public class CalendarFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_NOTE && resultCode == RESULT_OK) {
             MyEventDay myEventDay = data.getParcelableExtra(RESULT);
+            setMyObject(myEventDay);
             mCalendarView.setDate(myEventDay.getCalendar());
             mEventDays.add(myEventDay);
             mCalendarView.setEvents(mEventDays);
@@ -94,5 +108,28 @@ public class CalendarFragment extends Fragment {
         startActivity(intent);
     }
 
+    //maybe change this to arraylist?
+    public MyEventDay getMyObject() {
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+        if (savedObject == null) {
+            String savedValue = prefs.getString(PREF_MY_OBJECT, "");
+            if (savedValue.equals("")) {
+                savedObject = null;
+            } else {
+                savedObject = gson.fromJson(savedValue, MyEventDay.class);
+            }
+        }
 
+        return savedObject;
+    }
+
+    public void setMyObject(MyEventDay obj) {
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+        if (obj == null) {
+            prefs.edit().putString(PREF_MY_OBJECT, "").commit();
+        } else {
+            prefs.edit().putString(PREF_MY_OBJECT, gson.toJson(obj)).commit();
+        }
+        savedObject = obj;
+    }
 }
