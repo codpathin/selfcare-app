@@ -134,6 +134,7 @@ A self-care reminder app. It reminds users to stretch, drink water, to have good
    | `GET`       | oauth/authenticate   | Allows a Consumer application to use an OAuth request_token to request user authorization.| |
    
 #### Walkthrough
+<img src='SelfCareWalkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <img src='SelfCareWalkthrough2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
