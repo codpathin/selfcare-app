@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,12 +21,14 @@ import com.example.myapplication.MyEventDay;
 import com.example.myapplication.NotePreviewActivity;
 import com.example.myapplication.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -38,15 +40,12 @@ public class CalendarFragment extends Fragment {
     public static final int ADD_NOTE = 44;
 
     private CalendarView mCalendarView;
-    private List<EventDay> mEventDays = new ArrayList<>();
-    private FloatingActionButton fab;
+    private ArrayList<EventDay> mEventDays = new ArrayList<>();
 
-    private Context context;
-    private MyEventDay savedObject;
-    private List<MyEventDay> listEvents = new ArrayList<>();
-    private static final String PREF_MY_OBJECT = "pref_my_object";
-    //private SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-    private Gson gson = new GsonBuilder().create();
+    private ArrayList<String> dates = new ArrayList<>();
+    private ArrayList<String> notes = new ArrayList<>();
+
+    private FloatingActionButton fab;
 
 
 
@@ -62,8 +61,44 @@ public class CalendarFragment extends Fragment {
         fab = view.findViewById(R.id.fab);
         mCalendarView = view.findViewById(R.id.calendarView);
 
-        getMyObject();
-        mEventDays.add(savedObject);
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+
+        //RESET SHAREDPREFERENCES
+        //prefs.edit().clear().commit();
+
+        Set<String> dateSet = prefs.getStringSet("dates", new HashSet<String>());
+        dates.addAll(dateSet);
+
+        //Log.e("Event", dates.toString());
+        //Log.e("Event", notes.toString());
+        Date currentDate = Calendar.getInstance().getTime();
+        //Log.e("Event", currentDate.toString());
+
+
+        //parses the date and notes
+        for (int i = 0; i < dates.size(); i++) {
+            Calendar calendar = Calendar.getInstance();
+
+            String date = dates.get(i);
+            String[] values = date.split(" ");
+            int day = Integer.parseInt(values[0]);
+            int month = Integer.parseInt(values[1]) - 1;
+            int year = Integer.parseInt(values[2]);
+            String note = values[3];
+            Log.e("test", " " + day + " " + month + " " + year + " "+ note);
+
+            calendar.clone();
+            calendar.set(year, month, day);
+            mCalendarView.setDate(calendar);
+
+            mEventDays.add(new MyEventDay(calendar, R.drawable.ic_message_black_48dp, note));
+            mCalendarView.setEvents(mEventDays);
+        }
+
+        Log.e("Event", dates.toString());
+        mCalendarView.setDate(currentDate);
+
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,12 +121,24 @@ public class CalendarFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
         if (requestCode == ADD_NOTE && resultCode == RESULT_OK) {
             MyEventDay myEventDay = data.getParcelableExtra(RESULT);
-            setMyObject(myEventDay);
             mCalendarView.setDate(myEventDay.getCalendar());
             mEventDays.add(myEventDay);
             mCalendarView.setEvents(mEventDays);
+
+            String note = myEventDay.getNote();
+
+            //puts the date list into a hashset so u can retrieve it in the sharedpreferences
+            Set<String> dateSet = new HashSet<>();
+            String formattedDate = getFormattedDate(myEventDay.getCalendar().getTime());
+            dates.add(formattedDate + " " + note);
+            dateSet.addAll(dates);
+
+            SharedPreferences.Editor edit = prefs.edit();
+            edit.putStringSet("dates", dateSet);
+            edit.commit();
         }
     }
 
@@ -108,28 +155,9 @@ public class CalendarFragment extends Fragment {
         startActivity(intent);
     }
 
-    //maybe change this to arraylist?
-    public MyEventDay getMyObject() {
-        SharedPreferences prefs = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
-        if (savedObject == null) {
-            String savedValue = prefs.getString(PREF_MY_OBJECT, "");
-            if (savedValue.equals("")) {
-                savedObject = null;
-            } else {
-                savedObject = gson.fromJson(savedValue, MyEventDay.class);
-            }
-        }
-
-        return savedObject;
+    public static String getFormattedDate(Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MM yyyy", Locale.getDefault());
+        return simpleDateFormat.format(date);
     }
 
-    public void setMyObject(MyEventDay obj) {
-        SharedPreferences prefs = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
-        if (obj == null) {
-            prefs.edit().putString(PREF_MY_OBJECT, "").commit();
-        } else {
-            prefs.edit().putString(PREF_MY_OBJECT, gson.toJson(obj)).commit();
-        }
-        savedObject = obj;
-    }
 }
