@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.parceler.Parcels;
+
 import java.util.List;
 
 public class StretchAdapter  extends RecyclerView.Adapter<StretchAdapter.ViewHolder> {
@@ -55,12 +57,12 @@ public class StretchAdapter  extends RecyclerView.Adapter<StretchAdapter.ViewHol
 
         public void bind(Stretch Stretch){
             tvName.setText(Stretch.getName());
-
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(context, DetailActvity.class);
+                    Intent i = new Intent(context, StretchDetailActvity.class);
                     i.putExtra("name", Stretch.getName());
+                    i.putExtra("stretch", Parcels.wrap(Stretch));
                     context.startActivity(i);
                 }
             });

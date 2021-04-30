@@ -8,8 +8,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.myapplication.Stretch;
+import com.example.myapplication.StretchAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,18 +23,24 @@ public class StretchlistActivity extends Fragment {
 
     List<Stretch> stretches;
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_stretchlist, container, false);
 
+        return view;
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+
         RecyclerView rvStretches = view.findViewById(R.id.rvStretches);
+
         stretches = new ArrayList<>();
+        stretches.addAll(Stretch.createList());
+
 
         StretchAdapter stretchAdapter = new StretchAdapter(view.getContext(), stretches);
 
@@ -38,22 +48,9 @@ public class StretchlistActivity extends Fragment {
 
         rvStretches.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        super.onViewCreated(view, savedInstanceState);
+
     }
 
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stretchlist);
 
-        RecyclerView rvStretches = findViewById(R.id.rvStretches);
-        stretches = new ArrayList<>();
-
-        StretchAdapter stretchAdapter = new StretchAdapter(this, stretches);
-
-        rvStretches.setAdapter(stretchAdapter);
-
-        rvStretches.setLayoutManager(new LinearLayoutManager(this));
-
-    }*/
 }

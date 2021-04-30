@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".DetailActvity"></activity>
+        <activity android:name=".StretchDetailActvity"></activity>
         <activity android:name=".NotePreviewActivity" />
         <activity android:name=".AddNoteActivity" />
         <activity android:name=".MoodActivity" />
