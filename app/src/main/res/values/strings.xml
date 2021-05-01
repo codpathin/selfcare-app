@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Self Care</string>
     <string-array name="planets_array">
         <item>Mercury</item>
         <item>Venus</item>
@@ -10,5 +10,4 @@
         <item>Uranus</item>
         <item>Neptune</item>
     </string-array>
-    <string name="no_note">hey</string>
 </resources>
