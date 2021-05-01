@@ -17,12 +17,11 @@ public class NotePreviewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.note_preview_activity);
+        setContentView(R.layout.activity_notepreview);
 
         Intent intent = getIntent();
 
         TextView note = (TextView) findViewById(R.id.tvRNote);
-        //((eventDay.getCalendar().get(Calendar.MONTH)+1)+"."+(eventDay.getCalendar().get(Calendar.DATE))+"."+eventDay.getCalendar().get(Calendar.YEAR)) TODO: load in reminders by date
         if (intent != null) {
             Object event = intent.getParcelableExtra(CalendarFragment.EVENT);
 
