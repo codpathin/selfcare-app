@@ -13,8 +13,8 @@
         android:title="Compose"
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_logout"
-        android:icon="@android:drawable/btn_dialog"
-        android:title="Logout"
+        android:id="@+id/action_stretches"
+        android:icon="@drawable/ic_baseline_face_24"
+        android:title="Stretches"
         app:showAsAction="always" />
 </menu>

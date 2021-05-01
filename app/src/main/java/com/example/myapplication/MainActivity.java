@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.action_compose:
                         fragment = new ComposeFragment();
                         break;
-                    case R.id.action_logout:
+                    case R.id.action_stretches:
                         fragment = new StretchlistActivity();
                         break;
                     default: return true;
