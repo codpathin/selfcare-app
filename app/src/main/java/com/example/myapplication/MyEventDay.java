@@ -13,6 +13,9 @@ public class MyEventDay extends EventDay implements Parcelable {
         super(day, imageResource);
         mNote = note;
     }
+    public void setNote(String note) {
+        mNote = note;
+    }
     public  String getNote() {
         return mNote;
     }
@@ -40,4 +43,5 @@ public class MyEventDay extends EventDay implements Parcelable {
     public int describeContents() {
         return 0;
     }
+
 }
