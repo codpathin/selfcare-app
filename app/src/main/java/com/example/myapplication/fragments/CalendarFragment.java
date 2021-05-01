@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -56,7 +57,7 @@ public class CalendarFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.calendar_view2, container, false);
+        View view = inflater.inflate(R.layout.fragment_calendar, container, false);
 
         fab = view.findViewById(R.id.fab);
         mCalendarView = view.findViewById(R.id.calendarView);
@@ -110,7 +111,6 @@ public class CalendarFragment extends Fragment {
         mCalendarView.setOnDayClickListener(new OnDayClickListener() {
             @Override
             public void onDayClick(EventDay eventDay) {
-                //NOTE: formatting - Toast.makeText(getContext(), ((eventDay.getCalendar().get(Calendar.MONTH))+"."+(eventDay.getCalendar().get(Calendar.DATE))+"."+(eventDay.getCalendar().get(Calendar.YEAR))),Toast.LENGTH_LONG).show();
                 previewNote(eventDay);
             }
         });
