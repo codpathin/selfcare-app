@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,15 +20,14 @@ import com.example.myapplication.AddNoteActivity;
 import com.example.myapplication.MyEventDay;
 import com.example.myapplication.NotePreviewActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.TinyDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Locale;
-import java.util.Set;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -67,16 +65,12 @@ public class CalendarFragment extends Fragment {
         //RESET SHAREDPREFERENCES
         //prefs.edit().clear().commit();
 
-        Set<String> dateSet = prefs.getStringSet("dates", new HashSet<String>());
-        dates.addAll(dateSet);
+        TinyDB tinydb = new TinyDB(getContext());
+        dates = tinydb.getListString("dates");
+        notes = tinydb.getListString("notes");
 
-        //Log.e("Event", dates.toString());
-        //Log.e("Event", notes.toString());
         Date currentDate = Calendar.getInstance().getTime();
-        //Log.e("Event", currentDate.toString());
 
-
-        //parses the date and notes
         for (int i = 0; i < dates.size(); i++) {
             Calendar calendar = Calendar.getInstance();
 
@@ -85,8 +79,8 @@ public class CalendarFragment extends Fragment {
             int day = Integer.parseInt(values[0]);
             int month = Integer.parseInt(values[1]) - 1;
             int year = Integer.parseInt(values[2]);
-            String note = values[3];
-            Log.e("test", " " + day + " " + month + " " + year + " "+ note);
+            String note = notes.get(i);
+            Log.e("test", note);
 
             calendar.clone();
             calendar.set(year, month, day);
@@ -130,15 +124,24 @@ public class CalendarFragment extends Fragment {
 
             String note = myEventDay.getNote();
 
-            //puts the date list into a hashset so u can retrieve it in the sharedpreferences
-            Set<String> dateSet = new HashSet<>();
-            String formattedDate = getFormattedDate(myEventDay.getCalendar().getTime());
-            dates.add(formattedDate + " " + note);
-            dateSet.addAll(dates);
+            TinyDB tinydb = new TinyDB(getContext());
 
-            SharedPreferences.Editor edit = prefs.edit();
-            edit.putStringSet("dates", dateSet);
-            edit.commit();
+            dates = tinydb.getListString("dates");
+            notes = tinydb.getListString("notes");
+
+            String formattedDate = getFormattedDate(myEventDay.getCalendar().getTime());
+
+            if (dates.contains(formattedDate)) {
+                int index = dates.indexOf(formattedDate);
+                notes.set(index, note);
+            }
+            else {
+                notes.add(note);
+                dates.add(formattedDate);
+            }
+
+            tinydb.putListString("dates", dates);
+            tinydb.putListString("notes", notes);
         }
     }
 

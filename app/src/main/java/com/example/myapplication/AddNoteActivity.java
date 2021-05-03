@@ -3,26 +3,44 @@ package com.example.myapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.applandeo.materialcalendarview.CalendarView;
+import com.applandeo.materialcalendarview.EventDay;
+import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.example.myapplication.fragments.CalendarFragment;
 
 public class AddNoteActivity extends AppCompatActivity {
+    private CalendarView datePicker;
     MyEventDay myEventDay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addnote);
 
-        final CalendarView datePicker = (CalendarView) findViewById(R.id.datePicker);
+        datePicker = (CalendarView) findViewById(R.id.datePicker2);
         Button button = (Button) findViewById(R.id.addNoteButton);
+        TextView flavorText = findViewById(R.id.flavorText);
         final EditText noteEditText = (EditText) findViewById(R.id.noteEditText);
+
+        datePicker.setOnDayClickListener(new OnDayClickListener() {
+            @Override
+            public void onDayClick(EventDay eventDay) {
+                Log.e("event", "in date picker");
+                button.setVisibility(View.VISIBLE);
+                flavorText.setVisibility(View.VISIBLE);
+                noteEditText.setVisibility(View.VISIBLE);
+                datePicker.setVisibility(View.GONE);
+
+            }
+        });
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

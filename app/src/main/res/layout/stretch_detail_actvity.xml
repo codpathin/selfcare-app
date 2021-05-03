@@ -18,11 +18,24 @@
         android:id="@+id/ivExercise"
         android:layout_width="match_parent"
         android:layout_height="349dp"
-        tools:src="@tools:sample/avatars" />
+        tools:src="@drawable/dagsedfgdf" />
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0:00"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="This stretch is good for..." />
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="start" />
 </LinearLayout>
