@@ -9,6 +9,14 @@
         <item>@drawable/desk5</item>
     </integer-array>
 
+    <integer-array name="sleep_stretch_routine">
+        <item>@drawable/sleep1</item>
+        <item>@drawable/sleep2</item>
+        <item>@drawable/sleep3</item>
+        <item>@drawable/sleep4</item>
+        <item>@drawable/sleep5</item>
+    </integer-array>
+
     <integer-array name="completed">
         <item>@drawable/completed</item>
     </integer-array>

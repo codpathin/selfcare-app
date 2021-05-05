@@ -2,7 +2,6 @@ package com.example.myapplication.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +17,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.allyants.notifyme.NotifyMe;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.Reminder;
 
-import java.io.File;
+import java.util.Calendar;
 
 public class ComposeFragment extends Fragment {
 
@@ -77,6 +77,29 @@ public class ComposeFragment extends Fragment {
                 }
 
                 Reminder created = new Reminder(name, date, hour, min, notes);
+
+                Calendar now = Calendar.getInstance();
+                now.set(Calendar.HOUR_OF_DAY, hour);
+                now.set(Calendar.MINUTE, min);
+                now.set(Calendar.YEAR, etDate.getYear());
+                now.set(Calendar.MONTH, etDate.getMonth());
+                now.set(Calendar.DAY_OF_MONTH, etDate.getDayOfMonth());
+                now.set(Calendar.SECOND, 1);
+
+                Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+
+                //create notification
+                NotifyMe notifyMe = new NotifyMe.Builder(getActivity().getApplicationContext()).
+                        title(name)
+                        .content(notes)
+                        .color(255,0,0,255)
+                        .led_color(255,255,255,255)
+                        .time(now)
+                        .large_icon(R.mipmap.ic_launcher_round)
+                        .addAction(new Intent(),"Dismiss",true,false)
+                        .addAction(intent,"Done")
+                        .build();
+
                 Toast.makeText(getContext(), "Reminder created!", Toast.LENGTH_SHORT).show();
                 goMainActivity();
             }

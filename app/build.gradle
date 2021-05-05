@@ -53,4 +53,7 @@ dependencies {
     implementation 'org.parceler:parceler-api:1.1.12'
     annotationProcessor 'org.parceler:parceler:1.1.12'
     implementation 'commons-io:commons-io:2.6'
+
+    implementation 'com.github.jakebonk:NotifyMe:1.0.0'
+
 }

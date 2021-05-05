@@ -1,13 +1,8 @@
 <resources>
     <string name="app_name">Self Care</string>
     <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+        <item>Stretch</item>
+        <item>Important</item>
+        <item>Meetup</item>
     </string-array>
 </resources>
