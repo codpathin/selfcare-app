@@ -15,7 +15,9 @@ import com.example.myapplication.fragments.CalendarFragment;
 import com.example.myapplication.fragments.ComposeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+import org.parceler.Parcels;
+
+public class MainActivity extends AppCompatActivity implements ComposeFragment.OnDataPass {
     final FragmentManager fragmentManager = getSupportFragmentManager();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new ComposeFragment();
                         break;
                     case R.id.action_stretches:
-                        fragment = new StretchlistActivity();
+                        fragment = new StretchListFragment();
                         break;
                     default: return true;
                 }
@@ -78,5 +80,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onDataPass(Reminder r) { //todo: pass properly
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("reminder",Parcels.wrap(r)); //todo: figure out why time binds to notes
+        ReminderListFragment frag = new ReminderListFragment();
+        frag.setArguments(bundle);
+        fragmentManager.beginTransaction().replace(R.id.flContainer,frag).commit();
     }
 }

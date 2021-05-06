@@ -16,7 +16,6 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
     Context context;
     List<Reminder> reminders;
 
-    //pass context & reminders TODO: load in based on date?
 
     public ReminderAdapter(Context context, List<Reminder> reminders) {
         this.context = context;
