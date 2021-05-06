@@ -8,18 +8,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.myapplication.Stretch;
-import com.example.myapplication.StretchAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class StretchlistActivity extends Fragment {
+public class StretchListFragment extends Fragment {
 
     List<Stretch> stretches;
 
