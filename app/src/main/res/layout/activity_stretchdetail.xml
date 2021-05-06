@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="5dp"
     android:orientation="vertical"
     tools:context=".StretchDetailActvity">
 
@@ -30,7 +31,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="0:00"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvDescription"
