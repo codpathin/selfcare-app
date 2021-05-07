@@ -35,9 +35,9 @@ A self-care reminder app. It reminds users to stretch, drink water, to have good
 
 **Required Must-have Stories**
 
-[X] Notify users to stretch, drink water, posture
-[X] Allow users to input custom tasks 
-[X] Implement timer for each task
+- [x] Notify users to stretch, drink water, posture
+- [x] Allow users to input custom tasks 
+- [x] Implement timer for each task
 * Show how much time is left on the timer per task
 
 **Optional Nice-to-have Stories**
@@ -48,18 +48,18 @@ A self-care reminder app. It reminds users to stretch, drink water, to have good
 
 ### 2. Screen Archetypes
 
-[X] Notify users about tasks (Stream)
-   [X] Notify users to stretch, drink water, posture
-   [X] Allow users to input custom tasks 
-   [X] Implement timer for each task
-[X] Calender/Scheduler (Profile/Detail)
-   [X] User can press on date to see what reminders are on that day
-   [X] Full calender view of month
-[X] Creating new tasks (Creation)
-    [X] Name of task
-    [X] Date/time
-    * Frequency (how often the timer goes off, if needed)
-    [X] Extra notes
+- [x] Notify users about tasks (Stream)
+-    [x] Notify users to stretch, drink water, posture
+-    [x] Allow users to input custom tasks 
+-    [x] Implement timer for each task
+- [x] Calender/Scheduler (Profile/Detail)
+-    [x] User can press on date to see what reminders are on that day
+-    [x] Full calender view of month
+- [x] Creating new tasks (Creation)
+- [x] Name of task
+- [x] Date/time
+- [ ] Frequency (how often the timer goes off, if needed)
+- [x] Extra notes
 * Point Shop/Usage
     * Use the points gained from keeping up with schedule to get/customize avatars
 
