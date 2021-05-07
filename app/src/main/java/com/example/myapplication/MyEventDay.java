@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -9,9 +10,14 @@ import java.util.Calendar;
 
 public class MyEventDay extends EventDay implements Parcelable {
     private String mNote;
-    public MyEventDay(Calendar day, int imageResource, String note) {
-        super(day, imageResource);
+
+    public MyEventDay(Calendar day, int imageResource, String note, int labelColor) {
+        super(day, imageResource, labelColor);
         mNote = note;
+    }
+
+    public MyEventDay(Calendar day, int imageResource) {
+        super(day, imageResource);
     }
     public void setNote(String note) {
         mNote = note;
@@ -20,7 +26,7 @@ public class MyEventDay extends EventDay implements Parcelable {
         return mNote;
     }
     private MyEventDay(Parcel in) {
-        super((Calendar) in.readSerializable(), in.readInt());
+        super((Calendar) in.readSerializable(), in.readInt(), in.readInt());
         mNote = in.readString();
     }
     public static final Creator<MyEventDay> CREATOR = new Creator<MyEventDay>() {
@@ -33,15 +39,19 @@ public class MyEventDay extends EventDay implements Parcelable {
             return new MyEventDay[size];
         }
     };
+    @SuppressLint("RestrictedApi")
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeSerializable(getCalendar());
-        parcel.writeInt(getImageResource());
+        parcel.writeInt((Integer) getImageDrawable());
+        parcel.writeInt(getLabelColor());
         parcel.writeString(mNote);
     }
     @Override
     public int describeContents() {
         return 0;
     }
+
+
 
 }

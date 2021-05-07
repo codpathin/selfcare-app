@@ -1,8 +1,7 @@
 package com.example.myapplication.fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
+import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.example.myapplication.AddNoteActivity;
 import com.example.myapplication.MyEventDay;
@@ -60,40 +60,7 @@ public class CalendarFragment extends Fragment {
         fab = view.findViewById(R.id.fab);
         mCalendarView = view.findViewById(R.id.calendarView);
 
-        SharedPreferences prefs = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
-
-        //RESET SHAREDPREFERENCES
-        //prefs.edit().clear().commit();
-
-        TinyDB tinydb = new TinyDB(getContext());
-        dates = tinydb.getListString("dates");
-        notes = tinydb.getListString("notes");
-
-        Date currentDate = Calendar.getInstance().getTime();
-
-        for (int i = 0; i < dates.size(); i++) {
-            Calendar calendar = Calendar.getInstance();
-
-            String date = dates.get(i);
-            String[] values = date.split(" ");
-            int day = Integer.parseInt(values[0]);
-            int month = Integer.parseInt(values[1]) - 1;
-            int year = Integer.parseInt(values[2]);
-            String note = notes.get(i);
-            Log.e("test", note);
-
-            calendar.clone();
-            calendar.set(year, month, day);
-            mCalendarView.setDate(calendar);
-
-            mEventDays.add(new MyEventDay(calendar, R.drawable.ic_message_black_48dp, note));
-            mCalendarView.setEvents(mEventDays);
-        }
-
-        Log.e("Event", dates.toString());
-        mCalendarView.setDate(currentDate);
-
-
+        addEvents();
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,10 +82,13 @@ public class CalendarFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        SharedPreferences prefs = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
         if (requestCode == ADD_NOTE && resultCode == RESULT_OK) {
             MyEventDay myEventDay = data.getParcelableExtra(RESULT);
-            mCalendarView.setDate(myEventDay.getCalendar());
+            try {
+                mCalendarView.setDate(myEventDay.getCalendar());
+            } catch (OutOfDateRangeException e) {
+                e.printStackTrace();
+            }
             mEventDays.add(myEventDay);
             mCalendarView.setEvents(mEventDays);
 
@@ -142,6 +112,7 @@ public class CalendarFragment extends Fragment {
 
             tinydb.putListString("dates", dates);
             tinydb.putListString("notes", notes);
+
         }
     }
 
@@ -161,6 +132,46 @@ public class CalendarFragment extends Fragment {
     public static String getFormattedDate(Date date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MM yyyy", Locale.getDefault());
         return simpleDateFormat.format(date);
+    }
+
+    public void addEvents() {
+        TinyDB tinydb = new TinyDB(getContext());
+        //tinydb.remove("dates");
+        //tinydb.remove("notes");
+        dates = tinydb.getListString("dates");
+        notes = tinydb.getListString("notes");
+
+        Date currentDate = Calendar.getInstance().getTime();
+
+        for (int i = 0; i < dates.size(); i++) {
+            Calendar calendar = Calendar.getInstance();
+
+            String date = dates.get(i);
+            String[] values = date.split(" ");
+            int day = Integer.parseInt(values[0]);
+            int month = Integer.parseInt(values[1]) - 1;
+            int year = Integer.parseInt(values[2]);
+            String note = notes.get(i);
+
+            calendar.clone();
+            calendar.set(year, month, day);
+            try {
+                mCalendarView.setDate(calendar);
+            } catch (OutOfDateRangeException e) {
+                e.printStackTrace();
+            }
+
+            mEventDays.add(new MyEventDay(calendar, R.drawable.ic_message_black_48dp, note, Color.parseColor("#000000")));
+            mCalendarView.setEvents(mEventDays);
+        }
+
+        Log.e("error", dates.toString());
+
+        try {
+            mCalendarView.setDate(currentDate);
+        } catch (OutOfDateRangeException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -76,6 +76,7 @@ public class ComposeFragment extends Fragment {
         etNotes = view.findViewById(R.id.etNotes);
         btnCreate = view.findViewById(R.id.btnCreate);
 
+
         etTime.setCurrentHour(0);
         etTime.setCurrentMinute(0);
 

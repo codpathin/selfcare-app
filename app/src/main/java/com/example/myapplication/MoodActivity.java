@@ -11,10 +11,19 @@ import android.widget.RatingBar;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class MoodActivity extends AppCompatActivity {
     RatingBar rb;
     Button btn;
     public static final String TAG = "MoodActivity";
+    private ArrayList<String> moods = new ArrayList<>();
+    private String color = "#000000";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,6 +35,11 @@ public class MoodActivity extends AppCompatActivity {
 
         SharedPreferences settings = getSharedPreferences("PREFS", 0);
 
+        Calendar cal = Calendar.getInstance();
+
+        TinyDB tinydb = new TinyDB(this);
+        moods = tinydb.getListString("moods");
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,11 +50,28 @@ public class MoodActivity extends AppCompatActivity {
                 editor.putString("rating", rating);
                 editor.commit();
 
+                if(rating.equals("5.0")) {
+                    color = "#f2ff00";
+                }
+                if(rating.equals("4.0")) {
+                    color = "#00ff51";
+                }
+
+                moods.add(getFormattedDate(cal.getTime()));
+                moods.add(color);
+
+                tinydb.putListString("moods", moods);
+
                 Log.i(TAG, rating);
 
                 startActivity(new Intent(MoodActivity.this, MainActivity.class));
             }
         });
 
+    }
+
+    public static String getFormattedDate(Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MM yyyy", Locale.getDefault());
+        return simpleDateFormat.format(date);
     }
 }
