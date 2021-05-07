@@ -142,3 +142,5 @@ A self-care reminder app. It reminds users to stretch, drink water, to have good
 #### Walkthrough Sprint 3
 <img src='projectwalkthrough3.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
+#### Walkthrough Sprint 4
+<img src='walkthrough4.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
