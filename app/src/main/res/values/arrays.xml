@@ -17,6 +17,14 @@
         <item>@drawable/sleep5</item>
     </integer-array>
 
+    <integer-array name="morning_stretch_routine">
+        <item>@drawable/morning1</item>
+        <item>@drawable/morning2</item>
+        <item>@drawable/morning3</item>
+        <item>@drawable/morning4</item>
+        <item>@drawable/morning5</item>
+    </integer-array>
+
     <integer-array name="completed">
         <item>@drawable/completed</item>
     </integer-array>
