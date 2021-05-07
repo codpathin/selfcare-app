@@ -67,7 +67,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
             ivIcon = itemView.findViewById(R.id.ivIcon);
             tvReminder = itemView.findViewById(R.id.tvReminder);
             tvRNote = itemView.findViewById(R.id.tvRNote);
-            tvRTime = itemView.findViewById(R.id.tvRNote);
+            tvRTime = itemView.findViewById(R.id.tvRTime);
         }
 
         public void bind(Reminder reminder) {
