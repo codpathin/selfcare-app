@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -19,10 +21,11 @@ public class StretchDetailActvity extends AppCompatActivity {
     TextView timer;
     ImageView ivExercise;
     Button startBtn;
+    Button btShare;
 
     private boolean stop = false;
 
-    private Integer a = 5;
+    private Integer a = 8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +37,13 @@ public class StretchDetailActvity extends AppCompatActivity {
         ivExercise = findViewById(R.id.ivExercise);
         timer = findViewById(R.id.timer);
         startBtn = findViewById(R.id.start);
+        btShare = findViewById(R.id.btShare);
+
 
         Stretch stretch = Parcels.unwrap(getIntent().getParcelableExtra("stretch"));
         tvDescription.setText(stretch.getDescription());
         tvDetailName.setText(stretch.getName());
+        btShare.setVisibility(View.GONE);
 
         TypedArray imgs = getResources().obtainTypedArray(stretch.getDisplay());
         TypedArray completed = getResources().obtainTypedArray(R.array.completed);
@@ -65,6 +71,7 @@ public class StretchDetailActvity extends AppCompatActivity {
                             stop = true;
                             timer.setVisibility(View.GONE);
                             ivExercise.setImageResource(completed.getResourceId(0,0));
+                            btShare.setVisibility(View.VISIBLE);
                         }
 
                         //the countdown timer
@@ -77,11 +84,20 @@ public class StretchDetailActvity extends AppCompatActivity {
                         if (a == -1) {
                             ivExercise.setImageResource(imgs.getResourceId(i, 0));
                             i++;
-                            a = 5;
+                            a = 8;
                         }
                     }
                 };
                 handler.postDelayed(runnable, 0); //for initial delay..
+            }
+        });
+
+        btShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent tweet = new Intent(Intent.ACTION_VIEW);
+                tweet.setData(Uri.parse("https://twitter.com/intent/tweet?text=" + Uri.encode("Just finished doing my ") + Uri.encode(stretch.getName()) + Uri.encode("through the Self Care app!!!")));
+                startActivity(tweet);
             }
         });
     }

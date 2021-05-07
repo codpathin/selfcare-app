@@ -47,4 +47,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="start" />
+
+    <Button
+        android:id="@+id/btShare"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Share" />
 </LinearLayout>
