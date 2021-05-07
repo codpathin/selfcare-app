@@ -1,5 +1,6 @@
 package com.example.myapplication.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,6 +26,21 @@ import com.example.myapplication.Reminder;
 import java.util.Calendar;
 
 public class ComposeFragment extends Fragment {
+    public interface OnDataPass {
+        public void onDataPass(Reminder reminder);
+    }
+
+    OnDataPass dataPasser;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        dataPasser = (OnDataPass) context;
+    }
+
+    public void passData(Reminder reminder) {
+        dataPasser.onDataPass(reminder);
+    }
 
     public static final String TAG = "ComposeFragment";
     private EditText etName;
@@ -44,6 +60,7 @@ public class ComposeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         Spinner spinner = (Spinner) getView().findViewById(R.id.spinnerTask);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
@@ -101,13 +118,8 @@ public class ComposeFragment extends Fragment {
                         .build();
 
                 Toast.makeText(getContext(), "Reminder created!", Toast.LENGTH_SHORT).show();
-                goMainActivity();
+                passData(created);
             }
         });
-    }
-
-    private void goMainActivity() {
-        Intent i = new Intent(getContext(), MainActivity.class);
-        startActivity(i);
     }
 }

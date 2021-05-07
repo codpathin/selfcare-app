@@ -1,8 +1,8 @@
 package com.example.myapplication;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -15,11 +15,10 @@ import com.example.myapplication.fragments.CalendarFragment;
 import com.example.myapplication.fragments.ComposeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+import org.parceler.Parcels;
+
+public class MainActivity extends AppCompatActivity implements ComposeFragment.OnDataPass {
     final FragmentManager fragmentManager = getSupportFragmentManager();
-
-    Context context;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +60,14 @@ public class MainActivity extends AppCompatActivity {
                         // do something here
                         fragment = new CalendarFragment();
                         break;
+                    case R.id.action_reminderlist:
+                        fragment = new ReminderListFragment();
+                        break;
                     case R.id.action_compose:
                         fragment = new ComposeFragment();
                         break;
-                    case R.id.action_logout:
-                        fragment = new StretchlistActivity();
+                    case R.id.action_stretches:
+                        fragment = new StretchListFragment();
                         break;
                     default: return true;
                 }
@@ -78,5 +80,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onDataPass(Reminder r) { //todo: pass properly
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("reminder",Parcels.wrap(r)); //todo: figure out why time binds to notes
+        ReminderListFragment frag = new ReminderListFragment();
+        frag.setArguments(bundle);
+        fragmentManager.beginTransaction().replace(R.id.flContainer,frag).commit();
     }
 }

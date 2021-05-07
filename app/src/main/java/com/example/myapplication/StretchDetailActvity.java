@@ -30,7 +30,7 @@ public class StretchDetailActvity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.stretch_detail_actvity);
+        setContentView(R.layout.activity_stretchdetail);
 
         tvDetailName = findViewById(R.id.tvDetailName);
         tvDescription = findViewById(R.id.tvDescription);

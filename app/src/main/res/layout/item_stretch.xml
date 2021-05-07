@@ -9,9 +9,19 @@
         android:id="@+id/tvName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="0dp"
-        android:textSize="40dp"
+        android:fontFamily="sans-serif-light"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:textStyle="bold"
         tools:text="Stretch Here" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="5dp"
+        android:background="@color/gray" />
 </RelativeLayout>

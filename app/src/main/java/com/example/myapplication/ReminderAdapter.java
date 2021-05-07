@@ -16,7 +16,6 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
     Context context;
     List<Reminder> reminders;
 
-    //pass context & reminders TODO: load in based on date?
 
     public ReminderAdapter(Context context, List<Reminder> reminders) {
         this.context = context;
@@ -68,7 +67,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
             ivIcon = itemView.findViewById(R.id.ivIcon);
             tvReminder = itemView.findViewById(R.id.tvReminder);
             tvRNote = itemView.findViewById(R.id.tvRNote);
-            tvRTime = itemView.findViewById(R.id.tvRNote);
+            tvRTime = itemView.findViewById(R.id.tvRTime);
         }
 
         public void bind(Reminder reminder) {
