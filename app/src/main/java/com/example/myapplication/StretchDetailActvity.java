@@ -96,7 +96,7 @@ public class StretchDetailActvity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent tweet = new Intent(Intent.ACTION_VIEW);
-                tweet.setData(Uri.parse("https://twitter.com/intent/tweet?text=" + Uri.encode("Just finished doing my ") + Uri.encode(stretch.getName()) + Uri.encode("through the Self Care app!!!")));
+                tweet.setData(Uri.parse("https://twitter.com/intent/tweet?text=" + Uri.encode("Just finished doing my ") + Uri.encode(stretch.getName()) + Uri.encode(" through the Self Care app!!!")));
                 startActivity(tweet);
             }
         });
