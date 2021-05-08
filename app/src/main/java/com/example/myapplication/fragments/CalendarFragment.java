@@ -36,6 +36,7 @@ public class CalendarFragment extends Fragment {
     public static final String TAG = "CalendarFragment";
     public static final String RESULT = "result";
     public static final String EVENT = "event";
+    public static final String DATE = "date";
     public static final int ADD_NOTE = 44;
 
     private CalendarView mCalendarView;
@@ -45,8 +46,6 @@ public class CalendarFragment extends Fragment {
     private ArrayList<String> notes = new ArrayList<>();
 
     private FloatingActionButton fab;
-
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -126,11 +125,19 @@ public class CalendarFragment extends Fragment {
         if(eventDay instanceof MyEventDay){
             intent.putExtra(EVENT, (MyEventDay) eventDay);
         }
+        else {
+            intent.putExtra(DATE, getFormattedDateWord(eventDay.getCalendar().getTime()));
+        }
         startActivity(intent);
     }
 
     public static String getFormattedDate(Date date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MM yyyy", Locale.getDefault());
+        return simpleDateFormat.format(date);
+    }
+
+    public static String getFormattedDateWord(Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
         return simpleDateFormat.format(date);
     }
 

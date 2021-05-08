@@ -22,20 +22,26 @@ public class NotePreviewActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         TextView note = (TextView) findViewById(R.id.tvRNote);
+        TextView title = (TextView) findViewById(R.id.tvNotesTitle);
         if (intent != null) {
             Object event = intent.getParcelableExtra(CalendarFragment.EVENT);
 
             if(event instanceof MyEventDay){
                 MyEventDay myEventDay = (MyEventDay)event;
 
-                getSupportActionBar().setTitle(getFormattedDate(myEventDay.getCalendar().getTime()));
+                title.setText(getFormattedDate(myEventDay.getCalendar().getTime()) + " Notes");
+                //getSupportActionBar().setTitle(getFormattedDate(myEventDay.getCalendar().getTime()));
                 note.setText(myEventDay.getNote());
                 return;
             }
 
+            String date = intent.getStringExtra(CalendarFragment.DATE);
+            title.setText(date + " Notes");
+
             if(event instanceof EventDay){
                 EventDay eventDay = (EventDay)event;
-                getSupportActionBar().setTitle(getFormattedDate(eventDay.getCalendar().getTime()));
+                title.setText(date + " Notes");
+                //getSupportActionBar().setTitle(getFormattedDate(eventDay.getCalendar().getTime()));
             }
         }
     }

@@ -25,7 +25,7 @@ public class StretchDetailActvity extends AppCompatActivity {
 
     private boolean stop = false;
 
-    private Integer a = 8;
+    private Integer a = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +84,7 @@ public class StretchDetailActvity extends AppCompatActivity {
                         if (a == -1) {
                             ivExercise.setImageResource(imgs.getResourceId(i, 0));
                             i++;
-                            a = 8;
+                            a = 1;
                         }
                     }
                 };
