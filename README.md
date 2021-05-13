@@ -35,9 +35,10 @@ A self-care reminder app. It reminds users to stretch, drink water, to have good
 
 **Required Must-have Stories**
 
-- [x] Notify users to stretch, drink water, posture
+- [x] Notify users based on created reminders
 - [x] Allow users to input custom tasks 
 - [x] Implement timer for each task
+- [x] Preset list of stretches
 * Show how much time is left on the timer per task
 
 **Optional Nice-to-have Stories**
@@ -60,8 +61,7 @@ A self-care reminder app. It reminds users to stretch, drink water, to have good
 - [x] Date/time
 - [ ] Frequency (how often the timer goes off, if needed)
 - [x] Extra notes
-* Point Shop/Usage
-    * Use the points gained from keeping up with schedule to get/customize avatars
+- [x] List of preset stretches
 
 ### 3. Navigation
 
@@ -69,7 +69,6 @@ A self-care reminder app. It reminds users to stretch, drink water, to have good
 
 * Stream/Creation
 * Calendar/Scheduler
-* Point Shop
 
 **Flow Navigation** (Screen to Screen)
 
@@ -144,3 +143,6 @@ A self-care reminder app. It reminds users to stretch, drink water, to have good
 
 #### Walkthrough Sprint 4
 <img src='walkthrough4.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+#### Full App Walkthrough
+<img src='FinalWalkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
