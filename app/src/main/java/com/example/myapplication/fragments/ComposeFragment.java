@@ -22,7 +22,15 @@ import com.allyants.notifyme.NotifyMe;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.Reminder;
+import com.google.gson.JsonParser;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Calendar;
 
 public class ComposeFragment extends Fragment {
@@ -84,7 +92,7 @@ public class ComposeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String name = etName.getText().toString();
-                String date = (etDate.getMonth() + "."+etDate.getDayOfMonth()+"."+etDate.getYear());
+                String date = (etDate.getMonth() + " "+etDate.getDayOfMonth()+" "+etDate.getYear());
                 int hour = etTime.getCurrentHour();
                 int min = etTime.getCurrentMinute();
                 String notes = etNotes.getText().toString();
